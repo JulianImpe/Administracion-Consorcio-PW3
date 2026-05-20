@@ -1,0 +1,17 @@
+# Visual Studio
+.vscode/
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Build results
+bin/
+obj/
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
