@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agregar MVC
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
-// Registrar el DbContext
 var connectionString = builder.Configuration.GetConnectionString("ConsorcioDB");
 builder.Services.AddDbContext<ConsorcioDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
 
 var app = builder.Build();
-
+app.UseSession();
 // Configuración básica
 if (!app.Environment.IsDevelopment())
 {

@@ -1,0 +1,84 @@
+/* Variables globales de color - se usan en toda la app */
+:root {
+    --color-oscuro: #1E2D3D;
+    --color-claro: #F5F7FA;
+    --color-boton: #2E7DAF;
+    --color-boton-hover: #245f8a;
+}
+
+/* Clases reutilizables en toda la web */
+body {
+    background-color: var(--color-claro);
+    color: var(--color-oscuro);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.btn-principal {
+    background-color: var(--color-boton);
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-principal:hover {
+    background-color: var(--color-boton-hover);
+}
+
+.btn-secundario {
+    background-color: transparent;
+    color: var(--color-boton);
+    padding: 8px 20px;
+    border: 2px solid var(--color-boton);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secundario:hover {
+    background-color: var(--color-boton);
+    color: white;
+}
+
+.navbar {
+    background-color: var(--color-oscuro);
+    color: white;
+    padding: 12px 24px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
+.navbar a:hover {
+    opacity: 1;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.titulo-pagina {
+    color: var(--color-oscuro);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.footer {
+    background-color: var(--color-oscuro);
+    color: white;
+    text-align: center;
+    padding: 16px;
+    opacity: 0.9;
+    font-size: 0.85rem;
+}
