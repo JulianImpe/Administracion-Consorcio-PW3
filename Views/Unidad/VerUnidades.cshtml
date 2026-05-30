@@ -1,0 +1,37 @@
+﻿@* Crear vista para ver las unidades de un consorcio*@
+@{
+    ViewData["Title"] = "Unidades";
+}
+
+@model IEnumerable<Administracion_Consorcio_PW3.Models.Entidades.Unidad>
+
+<div>
+    <h1>Unidades</h1>
+    <a asp-action="CrearUnidad" asp-controller="Unidad" class="btn-dark"> Nueva Unidad</a>
+</div>
+
+<table class="table">
+
+     <thead>
+        <tr>
+            <th>Unidad</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+        <tbody>
+            @foreach (var unidad in Model)
+            {
+                <tr>
+                    <td>@unidad.Nombre</td>
+                    <td>@unidad.ApellidoPropietario</td>
+                    <td>@unidad.NombrePropietario</td>
+                    <td>@unidad.EmailPropietario</td>
+                    <td><a asp-action="EliminarUnidad" asp-route-id ="@unidad.IdUnidad" asp-controller="Unidad" class="btn-dark"> Eliminar</a> </td>
+                    <td><a asp-action="EditarUnidad" asp-route-id="@unidad.IdUnidad" asp-controller="Unidad" class="btn-dark"> Editar</a></td>
+                </tr>
+            }
+        </tbody>
+     </thead>
+
+</table>

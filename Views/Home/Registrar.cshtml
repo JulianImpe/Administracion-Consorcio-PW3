@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<div class="min-h-screen flex items-center justify-center px-4">
+
+    <div class="card w-full max-w-md">
+
+        <h1 class="titulo-pagina text-center">
+            Crear Cuenta
+        </h1>
+
+        <form asp-action="Registrar" method="post" class="space-y-5">
+
+            <div>
+                <label class="block mb-2 font-semibold">
+                    Email
+                </label>
+
+                <input type="email" name="email" placeholder="Ingrese su email"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+
+            <div>
+                <label class="block mb-2 font-semibold">
+                    Contraseña
+                </label>
+
+                <input type="password" name="password" placeholder="Ingrese su contraseña"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <button type="submit" class="btn-principal w-full">
+                Registrarse
+            </button>
+
+        </form>
+
+        <div class="text-center mt-6">
+            <p class="text-sm text-gray-600">
+                ¿Ya tenés cuenta?
+            </p>
+
+            <a asp-action="Ingresar" class="inline-block mt-3 btn-secundario">
+                Ingresar
+            </a>
+        </div>
+
+    </div>
+
+</div>

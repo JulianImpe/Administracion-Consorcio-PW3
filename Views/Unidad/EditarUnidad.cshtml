@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Editar Unidad";
+}
+
+@model Administracion_Consorcio_PW3.Models.Entidades.Unidad
+
+<form asp-action="EditarUnidad" method="post">
+ <input type="hidden" asp-for="IdUnidad"/> 
+ <div>
+     <label asp-for="Consorcio.Nombre"></label>
+     <input asp-for="Consorcio.Nombre" class="form-control"/>
+ </div>
+
+ <div>
+     <label asp-for="Nombre"></label>
+     <input asp-for="Nombre" class="form-control"/>
+ </div>
+
+ <div>
+     <label asp-for="NombrePropietario"></label>
+     <input asp-for="NombrePropietario" class="form-control" />
+ </div>
+
+ <div>
+     <label asp-for="ApellidoPropietario"></label>
+     <input asp-for="ApellidoPropietario" class="form-control" />
+ </div>
+
+ <div>
+     <label asp-for="EmailPropietario"></label>
+     <input asp-for="EmailPropietario" class="form-control" />
+ </div>
+
+ <div>
+     <label asp-for="Superficie"></label>
+     <input asp-for="Superficie" class="form-control" />
+ </div>
+ <button type="submit" class="btn btn-primary">Guardar</button>
+ <a asp-action="VerUnidades" class="btn btn-primary">Cancelar</a>
+</form>
