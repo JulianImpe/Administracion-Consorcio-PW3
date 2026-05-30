@@ -1,24 +1,35 @@
+@using Administracion_Consorcio_PW3.Models.ViewModels
+@model LoginViewModel
+@* Define que esta vista recibe un objeto de tipo LoginViewModel *@
+
 @{
     ViewData["Title"] = "Ingresar";
+    Layout = "~/Views/Layouts/_BaseLayout.cshtml";
 }
 
-<div class="min-h-screen flex items-center justify-center px-4">
+<div class="flex items-center justify-center py-10 px-4">
 
     <div class="card w-full max-w-md">
 
-        <h1 class="titulo-pagina text-center">
+        <h1
+            class="titulo-pagina text-center hover:opacity-80 transition-all">
             Iniciar Sesión
         </h1>
 
         <form asp-action="Ingresar" method="post" class="space-y-5">
+
+            @* Muestra los errores generales del modelo *@
+            <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm"></div>
 
             <div>
                 <label class="block mb-2 font-semibold">
                     Email
                 </label>
 
-                <input type="email" name="email" placeholder="Ingrese su email"
+                <input asp-for="Email" placeholder="Ingrese su email"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                @* Span para mostrar el error específico de este campo *@
+                <span asp-validation-for="Email" class="text-red-500 text-xs"></span>
             </div>
 
             <div>
@@ -26,15 +37,12 @@
                     Contraseña
                 </label>
 
-                <input type="password" name="password" placeholder="Ingrese su contraseña"
+                @* asp-for hereda el tipo 'password' del atributo [DataType] definido en el ViewModel *@
+                <input asp-for="Password" placeholder="Ingrese su contraseña"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                @* Span para mostrar el error específico de la contraseña *@
+                <span asp-validation-for="Password" class="text-red-500 text-xs"></span>
             </div>
-            @if (ViewBag.Error != null)
-            {
-                <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg">
-                    @ViewBag.Error
-                </div>
-            }
 
             <button type="submit" class="btn-principal w-full">
                 Ingresar
@@ -55,3 +63,41 @@
     </div>
 
 </div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<partial name="_ValidationScriptsPartial" />
+
+@if (ViewBag.Error != null)
+{
+<script>
+    Swal.fire({
+        icon: 'warning',
+        title: 'Atención',
+        text: '@ViewBag.Error',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true
+    });
+</script>
+}
+
+@if (TempData["Success"] != null)
+{
+<script>
+    @* Toast de éxito usando SweetAlert2 *@
+        Swal.fire({
+            icon: 'success',
+            title: '¡Logrado!',
+            text: '@TempData["Success"]',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true
+        });
+</script>
+}
+}

@@ -1,4 +1,5 @@
 using Administracion_Consorcio_PW3.Models;
+using Administracion_Consorcio_PW3.Models.ViewModels; // Importamos los ViewModels
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -26,24 +27,35 @@ namespace Administracion_Consorcio_PW3.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Registrar(string email, string password)
-        {
-            var resultado = _usuarioService.Registrar(email, password);
 
-            if (!resultado)
+        [HttpPost]
+        public IActionResult Registrar(RegistrarViewModel model)
+        {
+            // Ahora el ModelState evaluará las anotaciones de RegistrarViewModel (incluyendo PasswordValidacion)
+            if (!ModelState.IsValid)
             {
-                ViewBag.Error = "Email ya existente";
-                return View();
+                // Si hay errores, devolvemos la misma vista con el modelo para que se muestren los mensajes
+                return View(model);
             }
+
+            // Si es válido, usamos los datos del modelo para el servicio
+            var resultado = _usuarioService.Registrar(model.Email, model.Password);
+
+            // Guardamos el mensaje en TempData para que persista tras la redirección
+            TempData["Success"] = "¡Registro exitoso! Ya podés iniciar sesión.";
 
             return RedirectToAction("Ingresar");
         }
 
         [HttpPost]
-        public IActionResult Ingresar(string email, string password)
+        public IActionResult Ingresar(LoginViewModel model)
         {
-            var usuarios = _usuarioService.Login(email, password);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var usuarios = _usuarioService.Login(model.Email, model.Password);
 
             if (usuarios == null)
             {

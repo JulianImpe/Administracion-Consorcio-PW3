@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Administracion Consorcio</title>
+    @* Referencia al CSS local y al CDN de Tailwind *@
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'consorcio-oscuro': '#1E2D3D',
+                        'consorcio-boton': '#2E7DAF',
+                        'consorcio-hover': '#245f8a',
+                    }
+                }
+            }
+        }
+    </script>
+    @* Bloque de configuración para que el CDN de Tailwind reconozca clases personalizadas *@
+    <style type="text/tailwindcss">
+        @@layer components {
+            .card {
+                @@apply bg-white p-8 rounded-2xl shadow-xl border border-gray-100;
+            }
+            .btn-principal {
+                @@apply bg-consorcio-boton text-white font-bold py-3 px-6 rounded-lg hover:bg-consorcio-hover transition-all text-center flex items-center justify-center;
+            }
+            .btn-secundario {
+                @@apply bg-transparent text-consorcio-boton border-2 border-consorcio-boton font-bold py-3 px-6 rounded-lg hover:bg-consorcio-boton hover:text-white transition-all text-center flex items-center justify-center;
+            }
+            .titulo-pagina {
+                @@apply text-3xl font-black text-consorcio-oscuro tracking-tight mb-6;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+    @* Lógica para decidir qué Navbar mostrar basado en la sesión *@
+    @{
+        var idUsuario = Context.Session.GetInt32("IdUsuario");
+    }
+
+    @if (idUsuario != null)
+    {
+        @await Html.PartialAsync("~/Views/PartialViews/_pv_NavLogueado.cshtml")
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Views/PartialViews/_pv_NavAnonimo.cshtml")
+    }
+
+    <div class="flex-grow">
+        @RenderBody()
+    </div>
+
+    @* Inclusión del footer común *@
+    @await Html.PartialAsync("~/Views/PartialViews/_pv_Footer.cshtml")
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
