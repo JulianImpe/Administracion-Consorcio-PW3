@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Eliminar Unidad";
+}
+
+@model Administracion_Consorcio_PW3.Models.Entidades.Unidad
+
+<div>
+<h1>Esta seguro que desea Eliminar la unidad @Model.Nombre del Consorcio @Model.Consorcio.Nombre</h1>
+
+<form asp-action="Eliminar" method="post">
+  <input type="hidden" asp-for="IdUnidad"/>
+  <button type="submit" class="btn btn-danger">Eliminar</button>
+</form>
+<a asp-action="VerUnidades" asp-route-id="" class="btn btn-secondary">Cancelar</a>
+</div>
+

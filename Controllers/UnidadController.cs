@@ -31,5 +31,19 @@ namespace Administracion_Consorcio_PW3.Controllers
             return RedirectToAction("VerUnidades");
         }
 
+        [HttpGet]
+        public IActionResult EliminarUnidad(int Id) 
+        {
+            var unidad = _unidadService.ObtenerUnidades().FirstOrDefault(u => u.IdUnidad == Id);
+            return View(unidad);
+        }
+
+        [HttpPost]
+        public IActionResult Eliminar(int IdUnidad)
+        { 
+            _unidadService.EliminarUnidad(IdUnidad);
+            return RedirectToAction("VerUnidades");
+        }
+
     }
 }
